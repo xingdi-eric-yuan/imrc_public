@@ -1,0 +1,71 @@
+general:
+  dataset: "squad"  # squad, newsqa
+  data_path: "tokenized_squad_v1.1.2"
+  # data_path: "tokenized_newsqa_v1"
+  random_seed: 42
+  use_cuda: True  # disable this when running on machine without cuda
+  use_this_many_data: -1  # -1 for using all data
+  start_from_beginning: True
+  qa_reward_prior_threshold: 1.0
+  insert_random_distractors: 0  # insert this many random distractor paragraphs
+  naozi_capacity: 3  # capacity of agent's memory
+  generate_or_point: "point"  # "qmpoint": point from question and memory, "point": point from question, "generate": generate from vocab
+
+training:
+  batch_size: 20
+  max_nb_steps_per_episode: 20  # after this many steps, a game is terminated
+  max_episode: 10000000
+  learn_start_from_this_episode: 5000
+  target_net_update_frequency: 1000  # sync target net with online net per this many epochs
+  qa_loss_lambda: 1.0
+  interaction_loss_lambda: 1.0
+  discount_gamma: 0.90
+  optimizer:
+    step_rule: 'adam'  # adam
+    learning_rate: 0.00025
+    clip_grad_norm: 5
+
+evaluate:
+  run_eval: True
+  batch_size: 20
+  max_nb_steps_per_episode: 20  # after this many steps, a game is terminated
+
+checkpoint:
+  report_frequency: 10000  # episode
+  save_frequency: 10000  # episode
+  experiment_tag: 'test'
+  load_pretrained: True  # during test, enable this so that the agent load your pretrained model
+  load_from_tag: 'pretrain_model'
+
+replay:
+  replay_memory_capacity: 500000  # adjust this depending on your RAM size
+  replay_memory_priority_fraction: 0.5
+  update_per_k_game_steps: 2
+  replay_batch_size: 32
+  multi_step: 3
+
+epsilon_greedy:
+  noisy_net: True  # if this is true, then epsilon greedy is disabled
+  epsilon_anneal_episodes: 100000  # -1 if not annealing
+  epsilon_anneal_from: 1.0
+  epsilon_anneal_to: 0.1
+
+model:
+  max_vocab_size: -1
+  use_pretrained_embedding: True
+  word_embedding_size: 300
+  word_embedding_trainable: False
+  char_embedding_size: 200
+  char_embedding_trainable: True
+  embedding_dropout: 0.1
+  encoder_layers: 1
+  aggregation_layers: 7
+  encoder_conv_num: 4
+  aggregation_conv_num: 2
+  block_hidden_dim: 96
+  n_heads: 1
+  attention_dropout: 0.1
+  block_dropout: 0.1
+  action_scorer_hidden_dim: 150
+  action_scorer_softmax: False
+  question_answerer_hidden_dim: 150
