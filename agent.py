@@ -160,8 +160,12 @@ class Agent:
             self.config = yaml.safe_load(reader)
         print(self.config)
         self.load_config()
-        self.id2action = ["previous", "next", "stop", "ctrl+f"]
-        self.action2id = {"previous": 0, "next": 1, "stop": 2, "ctrl+f": 3}
+        if self.disable_prev_next:
+            self.id2action = ["stop", "ctrl+f"]
+            self.action2id = {"stop": 0, "ctrl+f": 1}
+        else:
+            self.id2action = ["previous", "next", "stop", "ctrl+f"]
+            self.action2id = {"previous": 0, "next": 1, "stop": 2, "ctrl+f": 3}
 
         self.online_net = QA_DQN(config=self.config, word_vocab=self.word_vocab, char_vocab=self.char_vocab, action_space_size=len(self.id2action))
         self.target_net = QA_DQN(config=self.config, word_vocab=self.word_vocab, char_vocab=self.char_vocab, action_space_size=len(self.id2action))
@@ -208,6 +212,7 @@ class Agent:
         self.naozi_capacity = self.config['general']['naozi_capacity']
         self.generate_or_point = self.config['general']['generate_or_point']
         self.enable_graph_input = self.config['general']['enable_graph_input']
+        self.disable_prev_next = self.config['general']['disable_prev_next']
 
         self.batch_size = self.config['training']['batch_size']
         self.max_nb_steps_per_episode = self.config['training']['max_nb_steps_per_episode']

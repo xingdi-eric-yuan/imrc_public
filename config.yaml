@@ -10,6 +10,7 @@ general:
   insert_random_distractors: 0  # insert this many random distractor paragraphs
   naozi_capacity: 3  # capacity of agent's memory
   generate_or_point: "point"  # "qmpoint": point from question and memory, "point": point from question, "generate": generate from vocab
+  disable_prev_next: False
 
 training:
   batch_size: 20
