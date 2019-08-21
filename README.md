@@ -1,6 +1,8 @@
-# Interactive Machine Reading Comprehension
+# Interactive Machine Reading Comprehension (iMRC)
 ---------------------------------------------------------------------------
 Xingdi Yuan, Jie Fu, Marc-Alexandre Cote, Yi Tay, Christopher Pal, Adam Trischler
+
+Existing machine reading comprehension (MRC) models do not scale effectively to real-world applications like web-level information retrieval and question answering (QA). We argue that this stems from the nature of MRC datasets: most of them are static environments wherein all the supporting documents and facts are fully observable. In this paper, we propose a simple method that reframes existing MRC datasets as interactive, partially observable environments. Specifically, we "occlude" the majority of a document's text and add context-sensitive commands that reveal ``glimpses'' of the hidden text to a model. We repurpose SQuAD and NewsQA as an initial case study, and then show how the interactive corpora can be used to train a model that seeks relevant information through sequential decision making. We believe that this kind of settings could pave the way to scaling models to web-scale QA scenarios.
 
 
 ## Dependencies
