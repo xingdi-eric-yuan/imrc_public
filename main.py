@@ -1,11 +1,9 @@
 import datetime
 import os
-import time
 import json
 import yaml
 import visdom
 import numpy as np
-from os.path import join as pjoin
 
 from gamified_squad import GamifiedSquad
 from gamified_newsqa import GamifiedNewsQA

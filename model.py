@@ -49,9 +49,6 @@ class QA_DQN(torch.nn.Module):
         self.char_embedding_size = model_config['char_embedding_size']
         self.char_embedding_trainable = model_config['char_embedding_trainable']
         self.embedding_dropout = model_config['embedding_dropout']
-        
-        self.gcn_hidden_dims = model_config['gcn_hidden_dims']
-        self.gcn_dropout = model_config['gcn_dropout']
 
         self.encoder_layers = model_config['encoder_layers']
         self.encoder_conv_num = model_config['encoder_conv_num']

@@ -211,7 +211,6 @@ class Agent:
         self.qa_reward_prior_threshold = self.config['general']['qa_reward_prior_threshold']
         self.naozi_capacity = self.config['general']['naozi_capacity']
         self.generate_or_point = self.config['general']['generate_or_point']
-        self.enable_graph_input = self.config['general']['enable_graph_input']
         self.disable_prev_next = self.config['general']['disable_prev_next']
 
         self.batch_size = self.config['training']['batch_size']

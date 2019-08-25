@@ -67,8 +67,7 @@ class GamifiedSquad(gym.Env):
             self.tmp_vocab[w] += 1
 
     def load_dataset(self, split):
-        
-        file_path = self.data_path + "/" + split
+        file_path = self.data_path + "/" + (split if split != "test" else "dev")
         story_file = file_path + "-v1.1-story.txt"
         question_file = file_path + "-v1.1-question.txt"
         answer_range_file = file_path + "-v1.1-answer-range.txt"
@@ -107,14 +106,11 @@ class GamifiedSquad(gym.Env):
     
     def read_config(self):
         self.data_path = self.config["general"]["data_path"]
-        if self.config["general"]["philly"]:
-            self.data_path = os.environ['PT_DATA_DIR'] + "/" + self.data_path
         self.random_seed = self.config["general"]["random_seed"]
         self.use_this_many_data = self.config["general"]["use_this_many_data"]
         self.start_from_beginning = self.config["general"]["start_from_beginning"]
         self.insert_random_distractors = self.config["general"]["insert_random_distractors"]
-        
-        self.pretrain_batch_size = self.config["pretrain"]["batch_size"]
+
         self.training_batch_size = self.config["training"]["batch_size"]
         self.training_max_nb_steps_per_episode = self.config["training"]["max_nb_steps_per_episode"]
         self.evaluate_batch_size = self.config["evaluate"]["batch_size"]
@@ -149,24 +145,6 @@ class GamifiedSquad(gym.Env):
         self.batch_pointer = 0
         self.current_story_sentence_list, self.current_question, self.current_answers = None, None, None
         self.infos = None
-
-    def get_batch(self):
-        if self.split == "train":
-            indices = np.random.choice(self.data_size, self.pretrain_batch_size).tolist()
-        else:
-            indices = np.arange(self.batch_pointer, self.batch_pointer + self.pretrain_batch_size).tolist()
-            self.batch_pointer += self.pretrain_batch_size
-            if self.batch_pointer >= self.data_size:
-                self.batch_pointer = 0
-        story, question, answer_positions, answers = [], [], [], []
-        for idx in indices:
-            if idx >= len(self.data["story"]):
-                break
-            story.append(self.data["story"][idx])
-            question.append(self.data["question"][idx])
-            answer_positions.append(self.data["answer_positions"][idx])
-            answers.append(self.data["answers"][idx])
-        return story, question, answer_positions, answers
 
     def reset(self, random=True):
         if random is True:
