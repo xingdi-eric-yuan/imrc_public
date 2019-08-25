@@ -243,11 +243,11 @@ class Agent:
         self.load_pretrained = self.config['checkpoint']['load_pretrained']
         self.load_from_tag = self.config['checkpoint']['load_from_tag']
 
-        self.discount_gamma = self.config['training']['discount_gamma']
         self.qa_loss_lambda = self.config['training']['qa_loss_lambda']
         self.interaction_loss_lambda = self.config['training']['interaction_loss_lambda']
 
         # replay buffer and updates
+        self.discount_gamma = self.config['replay']['discount_gamma']
         self.replay_batch_size = self.config['replay']['replay_batch_size']
         self.replay_memory = memory.PrioritizedReplayMemory(self.config['replay']['replay_memory_capacity'],
                                                             priority_fraction=self.config['replay']['replay_memory_priority_fraction'],
