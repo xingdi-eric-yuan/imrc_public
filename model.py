@@ -5,8 +5,8 @@ import numpy as np
 
 import torch
 import torch.nn.functional as F
-from layers import Embedding, FastBiLSTM, LSTMCell, BiMatchLSTM, BoundaryDecoder, masked_softmax, NoisyLinear, ActionScorerAttention, ActionScorerAttentionAdvantage
-from layers import EncoderBlock, CQAttention, AnswerPointer, MergeEmbeddings, StackedGraphConvolution, AggregationBlock
+from layers import Embedding, masked_softmax, NoisyLinear
+from layers import EncoderBlock, CQAttention, AnswerPointer, MergeEmbeddings, AggregationBlock
 from generic import to_pt
 
 logger = logging.getLogger(__name__)
