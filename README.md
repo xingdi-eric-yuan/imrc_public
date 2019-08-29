@@ -20,6 +20,13 @@ Before first time running it, download fasttext crawl-300d-2M.vec.zip from [HERE
 * We provide a split of the SQuAD dataset, because the official squad test data is hidden, so we split the training data to get an extra validation set, we use the official dev set as test set;
 * Download NewsQA dataset and run their script to split and tokenize it.
 
+## To Play
+We provide a simple interactive demo, one can feel what an interactive MRC data looks like.
+
+```
+python play.py
+```
+
 ## To Train
 ```
 python main.py
