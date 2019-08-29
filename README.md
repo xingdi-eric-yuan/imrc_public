@@ -21,7 +21,7 @@ Before first time running it, download fasttext crawl-300d-2M.vec.zip from [HERE
 * Download NewsQA dataset and run their script to split and tokenize it.
 
 ## To Play
-We provide a simple interactive demo, one can feel what an interactive MRC data looks like.
+We provide a simple interactive demo, one can feel what interactive MRC looks like.
 
 ```
 python play.py
