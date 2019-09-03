@@ -82,8 +82,6 @@ def train():
             if agent.noisy_net:
                 agent.reset_noise()  # Draw a new set of noisy weights
             commands, replay_info = agent.act(obs, infos, input_quest, input_quest_char, quest_id_list, random=act_randomly)
-
-            tmp_replay_buffer.append(replay_info)
             obs, infos = env.step(commands)
 
             if agent.noisy_net and step_in_total % agent.update_per_k_game_steps == 0:
@@ -101,6 +99,11 @@ def train():
             step_in_total += 1
             still_running = generic.to_np(replay_info[-1])
             print_cmds.append(commands[0] if still_running[0] else "--")
+
+            # force stopping
+            if step_no == agent.max_nb_steps_per_episode - 1:
+                replay_info[-1] = generic.to_pt(np.zeros_like(still_running), agent.use_cuda, "float")
+            tmp_replay_buffer.append(replay_info)
             if np.sum(still_running) == 0:
                 break
 
