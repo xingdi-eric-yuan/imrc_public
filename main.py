@@ -3,6 +3,7 @@ import os
 import json
 import yaml
 import visdom
+import torch
 import numpy as np
 
 from gamified_squad import GamifiedSquad
