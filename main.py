@@ -102,7 +102,7 @@ def train():
 
             # force stopping
             if step_no == agent.max_nb_steps_per_episode - 1:
-                replay_info[-1] = generic.to_pt(np.zeros_like(still_running), agent.use_cuda, "float")
+                replay_info[-1] = torch.zeros_like(replay_info[-1])
             tmp_replay_buffer.append(replay_info)
             if np.sum(still_running) == 0:
                 break
